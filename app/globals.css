@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paper dossier palette — warm ivory ground, ink text, amber accents */
+  --color-ink: #f3edde;
+  --color-ink-2: #ebe2cb;
+  --color-ink-3: #fbf8ef;
+  --color-ink-4: #f0e8d2;
+  --color-line: #d8c9a9;
+  --color-line-strong: #b4a17e;
+
+  /* Ink / text on paper */
+  --color-paper: #221d12;
+  --color-paper-dim: #5f5846;
+  --color-paper-faint: #8b826f;
+
+  /* Amber / ember accent */
+  --color-ember: #9d6418;
+  --color-ember-bright: #b2701c;
+  --color-ember-deep: #77490d;
+  --color-embersmoke: #8a7a5e;
+
+  /* Severity & tone */
+  --color-rust: #9e3f1b;
+  --color-rust-bright: #b54a20;
+  --color-sage: #5a6c3d;
+  --color-sand: #8a6a36;
+  --color-clay: #7a5c46;
+
+  /* Typography */
+  --font-serif: var(--font-hand-body), ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-hand-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-hand-body), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: #b4a17e #f3edde;
+  scrollbar-width: thin;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-serif);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: rgba(198, 143, 60, 0.35);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ember-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Case-file vignette: a faint warm falloff around the viewport edges */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      140% 120% at 50% 0%,
+      rgba(166, 105, 26, 0.08) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      120% 120% at 50% 100%,
+      rgba(120, 90, 40, 0.07) 0%,
+      transparent 60%
+    );
+}
+
+/* Paper grain — a whisper of fibre so the pages read as physical stock */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.15;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 260px 260px;
+  }
+
+@layer components {
+  /* Monospace metadata label — dates, case numbers, section markers */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-ember);
+  }
+
+  .meta-mono {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--color-paper-dim);
+  }
+
+  /* Big serif narrative display */
+  .display {
+    font-family: var(--font-hand-display);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  .hairline {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .story-body {
+    font-family: var(--font-hand-body);
+    font-size: clamp(1.1rem, 1.5vw + 0.7rem, 1.3rem);
+    line-height: 1.6;
+    letter-spacing: 0.008em;
+    color: var(--color-paper);
+    text-wrap: pretty;
+  }
+
+  .note {
+    font-family: var(--font-hand-body);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    letter-spacing: 0.006em;
+    color: var(--color-paper-dim);
+  }
+
+  /* Rubber-stamp artifacts — dossier realism, applied sparingly */
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-hand-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-rust-bright);
+    border: 2px solid currentColor;
+    border-radius: 3px;
+    padding: 0.35em 0.6em;
+    opacity: 0.78;
+    box-shadow:
+      1px 1px 0 rgba(158, 63, 27, 0.16),
+      -1px -1px 0 rgba(158, 63, 27, 0.08);
+    mix-blend-mode: multiply;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .stamp-ink {
+    color: var(--color-ember);
+    box-shadow:
+      1px 1px 0 rgba(157, 100, 24, 0.18),
+      -1px -1px 0 rgba(157, 100, 24, 0.08);
+  }
+  .stamp-sm {
+    font-size: 0.52rem;
+    padding: 0.28em 0.5em;
+  }
+  .stamp-rot-l {
+    transform: none;
+  }
+  .stamp-rot-r {
+    transform: none;
+  }
+
+  /* Timeline scrub control — visual layer is drawn in TimelineSection.tsx
+   (plain divs); the range input is an invisible accessible overlay. */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

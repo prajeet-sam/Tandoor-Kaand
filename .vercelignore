@@ -1,0 +1,17 @@
+# Build artifacts — regenerated on the platform, never upload stale copies
+.next
+out
+node_modules
+
+# Local tooling / caches
+.vscode
+.vercel
+.git
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Docs / scratch (not needed for the build or runtime)
+README.md
+CLAUDE.md
+AGENTS.md
+*.log
