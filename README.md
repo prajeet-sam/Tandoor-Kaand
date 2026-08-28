@@ -1,4 +1,4 @@
-# The Tandoor Case
+# Tandoor-Kaand
 
 An interactive, scroll-driven case file on the 1995 murder of Naina Sahni — the shooting at the Mandir Marg flat, the failed incineration in the Bagiya tandoor, and the forensic chain that convicted Sushil Sharma.
 
