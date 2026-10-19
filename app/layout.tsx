@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Caveat, Patrick_Hand } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/components/MotionProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 const caveat = Caveat({
   variable: "--font-hand-display",
@@ -112,6 +113,7 @@ export default function RootLayout({
           Skip to the article
         </a>
         <MotionProvider>{children}</MotionProvider>
+        <Analytics />
       </body>
     </html>
   );
